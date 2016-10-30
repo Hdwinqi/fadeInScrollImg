@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>afasfaf</title>
+    <script src="scripts/jquery-1.7.1.min.js"></script>
+    <script src="scripts/flashImg-plugin.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.min.css" rel="stylesheet"/>
+    <!--[if lt IE 7]>
+        <link href="css/font-awesome-ie7.min.css" rel="stylesheet"/>
+    <![endif]-->
+    <script>
+        $(document).ready(function(){
+            //首页焦点图片切换；
+            $("#fadImgs").scrollImg({
+                speed : "normal",                   //滚动速度；
+                timer : 2000,
+                autoPlay : false,
+                isItemNum : false,
+                isArrow : true,
+                isArrowAuto: true,
+                direction : "left",
+                stepNum : 5
+            });
+
+        });
+    </script>
+    <style>
+         ul{ margin:0;
+             padding:0;
+             list-style:none;
+         }
+         .flash_img {
+             margin:0 auto;
+            width: 200px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+         .flash_img ul.img-box{
+             position:absolute;
+         }
+         .flash_img ul.img-box li {
+             width:70px;
+             text-align:center;
+         }
+         .flash_img ul.img-box li a{
+             line-height:32px;
+         }
+
+         .arrow-icon{
+             position:absolute;
+             top:50%;
+             width: 240px;
+             z-index:100;
+             height:40px;
+             line-height:40;
+             margin-top:-10px;
+
+         }
+         .arrow-icon i:hover{
+             color:#0000cc;
+         }
+         .arrow-icon i{
+             width:12px;
+             height:18px;
+             line-height:18px;
+             margin:0 8px;
+             color:#666;
+             cursor:pointer;
+             font-weight:normal;
+             font-size:16px;
+             display:block;
+             text-align:center;
+
+         }
+    </style>
+
+</head>
+<body>
+<div style="width:240px;margin:100px auto;border:1px solid #ccc;position:relative">
+<div class="sectionMainDemo  flash_img" id="fadImgs">
+    <ul class="img-box js_img-box">
+        <li><a href="#">qqqqq</a></li>
+        <li><a href="#">cccc</a></li>
+        <li><a href="#">bbbb</a></li>
+        <li><a href="#">dddd</a></li>
+        <li><a href="#">qqqqq</a></li>
+        <li><a href="#">cccc</a></li>
+        <li><a href="#">bbbb</a></li>
+        <li><a href="#">dddd</a></li>
+        <li><a href="#">qqqqq</a></li>
+        <li><a href="#">cccc</a></li>
+        <li><a href="#">bbbb</a></li>
+        <li><a href="#">dddd</a></li>
+    </ul>
+ </div>
+    <div id="direction-arrow" class="arrow-icon clearfix">
+        <i class="icon-chevron-left pull-left js_icon-btn" style="display:none;"></i>  <!--目前插件比较依赖icon-chevron-left\icon-chevron-right-->
+        <i class="icon-chevron-right pull-right js_icon-btn" style="display:none;"></i>
+    </div>
+
+</div>
+
+</body>
+</html>

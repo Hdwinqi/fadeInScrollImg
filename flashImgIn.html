@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>afasfaf</title>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.color.js"></script>
+    <script src="scripts/flashImg-plugin.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.min.css" rel="stylesheet"/>
+    <!--[if lt IE 7]>
+        <link href="css/font-awesome-ie7.min.css" rel="stylesheet"/>
+    <![endif]-->
+    <script>
+        $(document).ready(function(){
+            //首页焦点图片切换；
+            $("#fadImgs").scrollImg({
+                speed : 300,           //滚动速度；
+                timer : 2000,
+                autoPlay : false,
+                isItemNum : true,
+                isArrow : true,
+                isArrowAuto: false,
+                direction : "fadeIn",
+                beforeCallBack:function(i,speed){
+                    var colorValue = ['#00b2ed','#1f233e', '#f2bb13','#373a37','#2b5ee0','#5555FF'];
+                    $('#flashImgWrap').animate({backgroundColor:colorValue[i]},speed);
+                }
+            });
+            //注册按钮；
+        });
+    </script>
+    <style>
+         ul{margin:0;padding:0;list-style:none;}
+         .flash_img {
+            width: 480px;
+            height: 400px;
+             margin:0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+         .flash_img ul.img-box{
+             position:absolute;
+         }
+
+         .flash_img ul.img-box li img{
+             width: 480px;
+         }
+         .flash_item {
+             position: absolute;
+             right: 10px;
+             bottom: 10px;
+             height: 18px;
+             padding-top: 2px;
+             z-index:11;
+         }
+         .flash_item li.on {
+             background-color: #1fa7da;
+             border-color: #82c2da;
+             color: #fff;
+             font-weight: bold;
+             height: 18px;
+             line-height: 18px;
+             margin-top: -2px;
+             width: 18px;
+         }
+         .flash_item li {
+             background-color: #e5f5f5;
+             border: 1px solid #dedede;
+             color: #888;
+             cursor: pointer;
+             float: left;
+             font-size: 12px;
+             height: 16px;
+             line-height: 16px;
+             margin-left: 3px;
+             text-align: center;
+             width: 16px;
+         }
+         .arrow-icon{
+             position:absolute;
+             width: 480px;
+             top:50%;
+             margin-top:-23px;
+             z-index:100;
+         }
+         .arrow-icon i{
+            margin:0 10px;
+             color:#ffffff;
+             cursor:pointer;
+         }
+         .arrow-icon i{
+             width:30px;
+             height:46px;
+             text-align:center;
+             line-height:46px;
+             background:rgba(255,255,255,.1);
+             filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19ffffff,endColorstr=#19ffffff);
+         }
+         .arrow-icon i:hover{
+             background:rgba(255,255,255,.3);
+             filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4Cffffff,endColorstr=#4Cffffff);
+         }
+         .arrow-icon i:active,.arrow-icon i:focus{
+             background:rgba(255,255,255,.4);
+             filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#66ffffff,endColorstr=#66ffffff);
+         }
+        .flashImgBg{
+            width:100%;
+            height:auto;
+            background: #116214;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id ='flashImgWrap' class="flashImgBg">
+<div class="sectionMainDemo  flash_img" id="fadImgs">
+    <ul class="img-box js_img-box">
+        <li><a href="#"><img id="simg1" src="images/image-1.jpg"></a></li>
+        <li><a href="#"><img id="simg2" src="images/image-2.jpg"></a></li>
+        <li><a href="#"><img id="simg3" src="images/image-3.jpg"></a></li>
+        <li><a href="#"><img id="simg4" src="images/image-4.jpg"></a></li>
+    </ul>
+    <div id="direction-arrow" class="arrow-icon clearfix">
+        <i class="icon-chevron-left pull-left js_icon-btn" style="display:none;"></i>
+        <i class="icon-chevron-right pull-right js_icon-btn" style="display:none;"></i>
+    </div>
+ </div>
+</div>
+</body>
+</html>
