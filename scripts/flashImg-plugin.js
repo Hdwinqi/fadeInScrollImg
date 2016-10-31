@@ -41,7 +41,7 @@
 
 
     scrollCore = function(obj,opts){
-        //  debugger;
+      //  debugger;
         var index=0;
         var showBox = $(".js_img-box",obj);
         var getLi = $(".js_img-box li",obj);
@@ -95,21 +95,21 @@
                 default :                                                                    //fadeIn
 
                     var j;
-                    if (!reverse) {                                                           //右
-                        j = i-1;
-                    } else if(reverse == "reverse") {                                        //左
-                        j = i+1;
-                    } else{
-                        j = reverse;
-                    }
-                    //j = i-1 < 0 ? size-1 : i-1;
+                   if (!reverse) {                                                           //右
+                       j = i-1;
+                   } else if(reverse == "reverse") {                                        //左
+                       j = i+1;
+                   } else{
+                       j = reverse;
+                   }
+                   //j = i-1 < 0 ? size-1 : i-1;
                     j = calculateIndex(j,size);
-                    if(opts.beforeCallBack && typeof opts.beforeCallBack === 'function') {
-                        opts.beforeCallBack(i,opts.speed*2);
+                   if(opts.beforeCallBack && typeof opts.beforeCallBack === 'function') {
+                       opts.beforeCallBack(i,opts.speed*2);
 
-                    }
-                    getLi.eq(i).animate({opacity: 'show','z-index':10}, opts.speed, 'easeOutQuad');
-                    getLi.eq(j).animate({opacity: 'hide','z-index':9}, opts.speed*2, 'easeOutQuad');
+                   }
+                    getLi.eq(i).animate({opacity: 'show','z-index':10}, opts.speed, 'linear');
+                    getLi.eq(j).animate({opacity: 'hide','z-index':9}, opts.speed, 'linear');
 
 
             }
@@ -148,7 +148,7 @@
                         return;
                     }else if(size>1) {
                         for(var i=1; i<=size; i++){
-                            // i == 1 ? setItemInnerHTML += "<li class='on'>"+1+"</li>" : setItemInnerHTML += "<li >"+i+"</li>";
+                           // i == 1 ? setItemInnerHTML += "<li class='on'>"+1+"</li>" : setItemInnerHTML += "<li >"+i+"</li>";
                             i == 1 ? setItemInnerHTML += "<li class='on'>"+1+"</li>" : setItemInnerHTML += "<li >"+i+"</li>";
                         }
 
