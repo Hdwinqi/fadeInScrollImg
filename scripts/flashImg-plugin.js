@@ -37,13 +37,16 @@
 
     var scrollCore = $.fn.scrollImg.scrollCore;    //init主函数
     var intervalTime;                             //循环滚动变量
+
+
+
     scrollCore = function(obj,opts){
-      //  debugger;
+        //  debugger;
         var index=0;
         var showBox = $(".js_img-box",obj);
         var getLi = $(".js_img-box li",obj);
         var size = opts.stepNum ? Math.ceil(getLi.size()/Math.floor(opts.stepNum)) : getLi.size();               //页数
-        var getLiStep = '',zIndex={};                                                                                        //步长；
+        var getLiStep = '';                                                                                        //步长；
         var getLiAllWidth;                                                                                         //图片总宽度；
         var dirArrow = $('#direction-arrow');
         var arrow = dirArrow.length > 0  ?  dirArrow : obj.parent(),                                              //方向按钮容器
@@ -61,7 +64,8 @@
             //console.log(getLi.index());
             getLi.each(function(i){
                 $(this).css({float:'none',position:'absolute','top':0, 'left':0, 'z-index':size-i});
-                zIndex[i] = size-i;
+                i == 0 ? $(this).show() : $(this).hide();
+                //zIndex[i] = size-i;
             });
 
         } else {
@@ -88,19 +92,26 @@
                 case "bottom":
                     showBox.animate({'bottom' : -i* getLiStep}, opts.speed);
                     break;
-                default :                                                        //fadeIn
-                    var j;
-                   if (reverse) {
-                       j = i+1 > size ? 0 : i+1;
-                   } else {
-                       j = i-1 < 0 ? size-1 : i-1;
-                   }
-                   if( typeof opts.beforeCallBack === 'function') {
-                       opts.beforeCallBack(i,opts.speed);
-                   }
+                default :                                                                    //fadeIn
 
-                    getLi.eq(i).animate({opacity: 'show','z-index':10}, opts.speed, 'swing');
-                    getLi.eq(j).animate({opacity: 'hide','z-index':9}, opts.speed*3, 'swing');
+                    var j;
+                    if (!reverse) {                                                           //右
+                        j = i-1;
+                    } else if(reverse == "reverse") {                                        //左
+                        j = i+1;
+                    } else{
+                        j = reverse;
+                    }
+                    //j = i-1 < 0 ? size-1 : i-1;
+                    j = calculateIndex(j,size);
+                    if(opts.beforeCallBack && typeof opts.beforeCallBack === 'function') {
+                        opts.beforeCallBack(i,opts.speed*2);
+
+                    }
+                    getLi.eq(i).animate({opacity: 'show','z-index':10}, opts.speed, 'easeOutQuad');
+                    getLi.eq(j).animate({opacity: 'hide','z-index':9}, opts.speed*2, 'easeOutQuad');
+
+
             }
             if(opts.isItemNum === true)
                 itemNum.eq(i).addClass("on").siblings().removeClass("on");
@@ -137,6 +148,7 @@
                         return;
                     }else if(size>1) {
                         for(var i=1; i<=size; i++){
+                            // i == 1 ? setItemInnerHTML += "<li class='on'>"+1+"</li>" : setItemInnerHTML += "<li >"+i+"</li>";
                             i == 1 ? setItemInnerHTML += "<li class='on'>"+1+"</li>" : setItemInnerHTML += "<li >"+i+"</li>";
                         }
 
@@ -150,12 +162,13 @@
             //光标停于数签时；
             itemNum.hover(function(e){
                 var that=this;
+                var oldIndex = index;
                 if (intervalTime) {
                     clearInterval(intervalTime);
                 }
                 intervalTime = setTimeout(function() {
                     index = itemNum.index(that);
-                    AdvertiseArea(index);
+                    AdvertiseArea(index,oldIndex);
                     arrowIconShow(index);
                 }, 100);
             },function(){
@@ -189,18 +202,20 @@
 
         //点击上一频、下一频
         if(opts.isArrow === true) {
-
             arrow.off('click').on('click', 'i.js_icon-btn', function(e){
+                //alert('faffffff');
+                //debugger;
                 if (intervalTime) {
                     clearInterval(intervalTime);
                 }
-                var that = $(this);
-                if ( that.is('.icon-chevron-left') ) {          //左
+                var that = $(this),
+                    item = that.index();
+                if ( item == 0 ) {          //左
                     index--;
                     index = calculateIndex(index,size);
                     //console.log(index);
                     AdvertiseArea(index,'reverse');
-                } else if ( that.is('.icon-chevron-right')) {   //右
+                } else if ( item == 1 ) {   //右
                     index++;
                     index = calculateIndex(index,size);
                     AdvertiseArea(index);
